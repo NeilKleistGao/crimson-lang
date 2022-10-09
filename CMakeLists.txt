@@ -8,7 +8,9 @@ list(APPEND CRIMSON_CORE lexer.cc compiler.cc)
 
 option(BUILD_TEST "build test modules" ON)
 
-find_package(LLVM REQUIRED)
+find_package(LLVM REQUIRED CONFIG)
+message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 
 if (BUILD_TEST)
   find_package(GTest REQUIRED)
@@ -20,11 +22,12 @@ include_directories(${LLVM_INCLUDE_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
 
 add_executable(crimson main.cc ${CRIMSON_CORE})
-llvm_map_components_to_libnames(llvm_libs core orcjit native)
+llvm_map_components_to_libnames(LLVM_LIBS core support orcjit native)
 target_link_libraries(crimson ${LLVM_LIBS})
 
 if (BUILD_TEST)
   add_executable(diff_test tests/diff_test.cc ${CRIMSON_CORE})
   target_link_libraries(diff_test ${GTEST_BOTH_LIBRARIES})
   target_link_libraries(diff_test ${CMAKE_THREAD_LIBS_INIT})
+  target_link_libraries(diff_test ${LLVM_LIBS})
 endif()
