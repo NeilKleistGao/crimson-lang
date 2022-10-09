@@ -1,9 +1,18 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.16)
 project(crimson)
 
 set(CMAKE_CXX_STANDARD 17)
+set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
+
+option(BUILD_TEST "build test modules" ON)
 
 find_package(LLVM REQUIRED)
+
+if (BUILD_TEST)
+    find_package(GTest REQUIRED)
+    find_package(Threads REQUIRED)
+    include_directories(${GTEST_INCLUDE_DIRS})
+endif()
 
 include_directories(${LLVM_INCLUDE_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
