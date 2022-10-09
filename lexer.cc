@@ -24,6 +24,7 @@
 #include "lexer.h"
 
 extern "C" {
+#include <clang-c/Index.h>
 }
 
 namespace crimson {
