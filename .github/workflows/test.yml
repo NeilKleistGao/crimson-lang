@@ -24,6 +24,7 @@ jobs:
         uses: KyleMayes/install-llvm-action@v1
         with:
           version: "10.0"
-      - name: do tests
+      - name: build
         shell: bash
-        run: ./test.sh
+        run: cmake -DBUILD_TEST=ON . && make
+
