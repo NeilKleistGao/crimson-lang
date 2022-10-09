@@ -27,4 +27,10 @@ jobs:
       - name: build
         shell: bash
         run: cmake -DBUILD_TEST=ON . && make
+      - name: test
+        shell: bash
+        run: ./bin/diff_test
+      - name: check no change
+        shell: bash
+        run: git diff-files -p --exit-code --diff-filter=ADMR -w
 
