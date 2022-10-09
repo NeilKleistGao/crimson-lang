@@ -21,14 +21,13 @@
  * SOFTWARE.
  */
 
-#include <gtest/gtest.h>
+#ifndef CRIMSON_COMPILER_H
+#define CRIMSON_COMPILER_H
 
-#include "../compiler.h"
+#include "lexer.h"
 
-TEST(DiffTest, EmptyTest) {
-  EXPECT_EQ(true, true);
-}
+namespace crimson {
+  void compile(int argc, char* argv[]); // TODO
+} // namespace crimson
 
-TEST(DiffTest, CTest) {
-//  crimson::compile(3, nullptr);
-}
+#endif //CRIMSON_COMPILER_H

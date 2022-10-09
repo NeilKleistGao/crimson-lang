@@ -21,14 +21,15 @@
  * SOFTWARE.
  */
 
-#include <gtest/gtest.h>
+#include "compiler.h"
 
-#include "../compiler.h"
+#include <llvm/Support/CommandLine.h>
 
-TEST(DiffTest, EmptyTest) {
-  EXPECT_EQ(true, true);
-}
+namespace crimson {
+  void compile(int argc, char* argv[]) {
+    using namespace llvm;
+    cl::ParseCommandLineOptions(argc, argv);
 
-TEST(DiffTest, CTest) {
-//  crimson::compile(3, nullptr);
-}
+    // TODO:
+  }
+} // namespace crimson

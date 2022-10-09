@@ -21,14 +21,11 @@
  * SOFTWARE.
  */
 
-#include <gtest/gtest.h>
+#include "lexer.h"
 
-#include "../compiler.h"
-
-TEST(DiffTest, EmptyTest) {
-  EXPECT_EQ(true, true);
+extern "C" {
 }
 
-TEST(DiffTest, CTest) {
-//  crimson::compile(3, nullptr);
-}
+namespace crimson {
+
+} // namespace crimson
