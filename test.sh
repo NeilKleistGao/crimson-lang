@@ -1,1 +1,2 @@
-echo "Hello World!"
+cmake -DBUILD_TEST=ON .
+make
