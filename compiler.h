@@ -24,6 +24,10 @@
 #ifndef CRIMSON_COMPILER_H
 #define CRIMSON_COMPILER_H
 
+#if !defined(linux) || !defined(__cplusplus) || __cplusplus < 201703L
+#error Environment Not Supported Yet
+#endif
+
 #include "lexer.h"
 
 namespace crimson {
