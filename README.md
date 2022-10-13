@@ -1,5 +1,7 @@
 # crimson-lang
 
+[![Tests](https://github.com/NeilKleistGao/crimson-lang/actions/workflows/test.yml/badge.svg)](https://github.com/NeilKleistGao/crimson-lang/actions/workflows/test.yml)
+
 ## Introduction
 A dialect language of C.
 Crimson language supports powerful, hygiene macro and keeps others the same.

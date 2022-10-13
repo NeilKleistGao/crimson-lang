@@ -36,6 +36,9 @@ SET(CLANG_LIBRARIES
         clangLex
         clangBasic)
 
+set(LLVM_ENABLE_RTTI ON)
+set(LLVM_ENABLE_EH ON)
+
 add_executable(crimson main.cc ${CRIMSON_CORE})
 target_link_libraries(crimson ${LLVM_LIBS} ${CLANG_LIBRARIES})
 
