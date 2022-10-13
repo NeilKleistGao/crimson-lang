@@ -26,10 +26,19 @@
 #include <llvm/Support/CommandLine.h>
 
 namespace crimson {
-  void compile(int argc, char* argv[]) {
+  // TODO: other systems
+  static const char* compiler_args[] = {
+    "-I/usr/include",
+    "-I."
+  };
+
+  void compile(int argc, const char* argv[]) {
     using namespace llvm;
+
+    cl::opt<std::string> filename_option(cl::Positional,
+                                         cl::desc("Input file"),
+                                         cl::Required);
     cl::ParseCommandLineOptions(argc, argv);
 
-    // TODO:
   }
 } // namespace crimson

@@ -31,7 +31,7 @@
 #include "lexer.h"
 
 namespace crimson {
-  void compile(int argc, char* argv[]); // TODO
+  void compile(int argc, const char* argv[]); // TODO
 } // namespace crimson
 
 #endif //CRIMSON_COMPILER_H

@@ -25,10 +25,14 @@
 
 #include "../compiler.h"
 
+#define COMPILE_ARGUMENTS(__FILENAME__) 2, new const char*[2] { "", __FILENAME__ }
+
 TEST(DiffTest, EmptyTest) {
   EXPECT_EQ(true, true);
 }
 
 TEST(DiffTest, CTest) {
-//  crimson::compile(3, nullptr);
+  crimson::compile(COMPILE_ARGUMENTS("test/court/hello_world.court"));
 }
+
+#undef COMPILE_ARGUMENTS
