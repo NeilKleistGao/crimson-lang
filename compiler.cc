@@ -23,22 +23,16 @@
 
 #include "compiler.h"
 
-#include <llvm/Support/CommandLine.h>
+#include "lexer.h"
 
 namespace crimson {
-  // TODO: other systems
-  static const char* compiler_args[] = {
-    "-I/usr/include",
-    "-I."
-  };
-
-  void compile(int argc, const char* argv[]) {
+  void compile(int p_argc, const char* p_argv[]) {
     using namespace llvm;
 
     cl::opt<std::string> filename_option(cl::Positional,
                                          cl::desc("Input file"),
                                          cl::Required);
-    cl::ParseCommandLineOptions(argc, argv);
+    cl::ParseCommandLineOptions(p_argc, p_argv);
 
   }
 } // namespace crimson

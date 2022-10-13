@@ -24,7 +24,31 @@
 #ifndef CRIMSON_LEXER_H
 #define CRIMSON_LEXER_H
 
+extern "C" {
+#include <clang-c/Index.h>
+}
+
+#include <optional>
+#include <llvm/Support/CommandLine.h>
+
 namespace crimson {
+  struct TokenStream;
+
+  std::optional<TokenStream> parseTokens(const llvm::cl::opt<std::string>& p_filename);
+
+  struct TokenStream {
+    unsigned int m_tokens_size;
+
+    TokenStream() : m_tokens(nullptr), m_tokens_size(0), m_unit(nullptr) {}
+    ~TokenStream();
+
+    CXToken& operator[](int p_index);
+
+    friend std::optional<TokenStream> parseTokens(const llvm::cl::opt<std::string>& p_filename);
+  private:
+    CXTranslationUnit m_unit;
+    CXToken* m_tokens;
+  };
 } // namespace crimson
 
 #endif //CRIMSON_LEXER_H

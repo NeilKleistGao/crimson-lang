@@ -28,10 +28,8 @@
 #error Environment Not Supported Yet
 #endif
 
-#include "lexer.h"
-
 namespace crimson {
-  void compile(int argc, const char* argv[]); // TODO
+  void compile(int p_argc, const char* p_argv[]); // TODO
 } // namespace crimson
 
 #endif //CRIMSON_COMPILER_H
