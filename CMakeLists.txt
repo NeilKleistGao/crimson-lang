@@ -3,6 +3,7 @@ project(crimson)
 
 set(CMAKE_CXX_STANDARD 17)
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 
 list(APPEND CRIMSON_CORE lexer.cc compiler.cc)
 
@@ -35,9 +36,6 @@ SET(CLANG_LIBRARIES
         clangAST
         clangLex
         clangBasic)
-
-set(LLVM_ENABLE_RTTI OFF)
-set(LLVM_ENABLE_EH OFF)
 
 add_executable(crimson main.cc ${CRIMSON_CORE})
 target_link_libraries(crimson ${LLVM_LIBS} ${CLANG_LIBRARIES})
