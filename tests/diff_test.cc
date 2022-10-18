@@ -32,7 +32,8 @@ TEST(DiffTest, EmptyTest) {
 }
 
 TEST(DiffTest, CTest) {
-  crimson::compile(COMPILE_ARGUMENTS("test/court/hello_world.court"));
+  int res = crimson::compile(COMPILE_ARGUMENTS("test/court/hello_world.court"));
+  EXPECT_EQ(res, 0);
 }
 
 #undef COMPILE_ARGUMENTS

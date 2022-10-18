@@ -29,7 +29,7 @@
 #endif
 
 namespace crimson {
-  void compile(int p_argc, const char* p_argv[]); // TODO
+  int compile(int p_argc, const char* p_argv[]); // TODO
 } // namespace crimson
 
 #endif //CRIMSON_COMPILER_H

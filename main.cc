@@ -24,6 +24,5 @@
 #include "compiler.h"
 
 int main(int argc, char* argv[]) {
-  crimson::compile(argc, const_cast<const char**>(argv));
-  return 0;
+  return crimson::compile(argc, const_cast<const char**>(argv));
 }

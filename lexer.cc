@@ -62,7 +62,10 @@ namespace crimson {
                                                  CXTranslationUnit_None);
 
       CXFile file = clang_getFile(stream.m_unit, p_filename.c_str());
-      // TODO:
+      CXSourceLocation start = clang_getLocationForOffset(stream.m_unit, file, 0);
+      CXSourceLocation end = clang_getLocationForOffset(stream.m_unit, file, -1);
+      clang_tokenize(stream.m_unit, clang_getRange(start, end),
+                     &stream.m_tokens, &stream.m_tokens_size);
 
       return LexResult{std::move(stream)};
     }

@@ -26,7 +26,7 @@
 #include "lexer.h"
 
 namespace crimson {
-  void compile(int p_argc, const char* p_argv[]) {
+  int compile(int p_argc, const char* p_argv[]) {
     using namespace llvm;
 
     cl::opt<std::string> filename_option(cl::Positional,
@@ -34,5 +34,7 @@ namespace crimson {
                                          cl::Required);
     cl::ParseCommandLineOptions(p_argc, p_argv);
 
+    LexResult lex_res = parseTokens(filename_option);
+    return lex_res.index(); // TODO: next step
   }
 } // namespace crimson
