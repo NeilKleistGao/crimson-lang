@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 
-list(APPEND CRIMSON_CORE lexer.cc compiler.cc)
+list(APPEND CRIMSON_CORE lexer.cc compiler.cc diagnostic.cc)
 
 option(BUILD_TEST "build test modules" ON)
 

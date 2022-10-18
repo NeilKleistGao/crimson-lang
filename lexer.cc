@@ -51,7 +51,7 @@ namespace crimson {
     return m_tokens[p_index];
   }
 
-  std::optional<TokenStream> parseTokens(const llvm::cl::opt<std::string>& p_filename) {
+  LexResult parseTokens(const llvm::cl::opt<std::string>& p_filename) {
     CXIndex index = clang_createIndex(0, 0);
     TokenStream stream{};
 
@@ -64,11 +64,11 @@ namespace crimson {
       CXFile file = clang_getFile(stream.m_unit, p_filename.c_str());
       // TODO:
 
-      return std::make_optional(std::move(stream));
+      return LexResult{std::move(stream)};
     }
     catch (...) {
       std::cerr << "can't compile file " << p_filename.c_str() << "." << std::endl;
-      return std::nullopt;
+      return LexResult{ErrorMessage{}};
     }
   }
 

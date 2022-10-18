@@ -21,37 +21,18 @@
  * SOFTWARE.
  */
 
-#ifndef CRIMSON_LEXER_H
-#define CRIMSON_LEXER_H
+#ifndef CRIMSON_DIAGNOSTIC_H
+#define CRIMSON_DIAGNOSTIC_H
 
-extern "C" {
-#include <clang-c/Index.h>
-}
-
-#include <variant>
-#include <llvm/Support/CommandLine.h>
-
-#include "diagnostic.h"
+#include <string>
 
 namespace crimson {
-  struct TokenStream;
-  using LexResult = std::variant<TokenStream, ErrorMessage>;
-
-  LexResult parseTokens(const llvm::cl::opt<std::string>& p_filename);
-
-  struct TokenStream {
-    unsigned int m_tokens_size;
-
-    TokenStream() : m_tokens(nullptr), m_tokens_size(0), m_unit(nullptr) {}
-    ~TokenStream();
-
-    CXToken& operator[](int p_index);
-
-    friend LexResult parseTokens(const llvm::cl::opt<std::string>& p_filename);
-  private:
-    CXTranslationUnit m_unit;
-    CXToken* m_tokens;
+  struct ErrorMessage {
+    std::string m_filename;
+    std::string m_message;
+    int m_line;
+    int m_pos;
   };
 } // namespace crimson
 
-#endif //CRIMSON_LEXER_H
+#endif //CRIMSON_DIAGNOSTIC_H
