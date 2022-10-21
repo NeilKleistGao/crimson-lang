@@ -29,7 +29,7 @@ jobs:
         run: cmake -DBUILD_TEST=ON . && make
       - name: test
         shell: bash
-        working-directory: ./test/court
+        working-directory: ./tests/court
         run: ../../bin/diff_test
       - name: check no change
         shell: bash
