@@ -32,11 +32,19 @@ namespace crimson {
           "-I."
   };
 
-  TokenStream::~TokenStream() {
-    clang_disposeTokens(m_unit, m_tokens, m_tokens_size);
-    clang_disposeTranslationUnit(m_unit);
+  TokenStream::TokenStream(TokenStream&& other) noexcept: m_tokens(other.m_tokens), m_tokens_size(other.m_tokens_size), m_unit(other.m_unit) {
+    other.m_unit = nullptr;
+    other.m_tokens = nullptr;
+    other.m_tokens_size = 0;
+  }
 
-    m_unit = nullptr; m_tokens = nullptr; m_tokens_size = 0;
+  TokenStream::~TokenStream() {
+    if (m_unit != nullptr) {
+      clang_disposeTokens(m_unit, m_tokens, m_tokens_size);
+      clang_disposeTranslationUnit(m_unit);
+
+      m_unit = nullptr; m_tokens = nullptr; m_tokens_size = 0;
+    }
   }
 
   CXToken& TokenStream::operator[](int p_index) {
@@ -64,8 +72,12 @@ namespace crimson {
       }
 
       CXFile file = clang_getFile(stream.m_unit, p_filename.c_str());
+      if (file == nullptr) {
+        throw std::exception{};
+      }
+
       CXSourceLocation start = clang_getLocationForOffset(stream.m_unit, file, 0);
-      CXSourceLocation end = clang_getLocationForOffset(stream.m_unit, file, -1);
+      CXSourceLocation end = clang_getLocationForOffset(stream.m_unit, file, 114514);
       clang_tokenize(stream.m_unit, clang_getRange(start, end),
                      &stream.m_tokens, &stream.m_tokens_size);
 

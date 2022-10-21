@@ -43,6 +43,7 @@ namespace crimson {
     unsigned int m_tokens_size;
 
     TokenStream() : m_tokens(nullptr), m_tokens_size(0), m_unit(nullptr) {}
+    TokenStream(TokenStream&& other) noexcept;
     ~TokenStream();
 
     CXToken& operator[](int p_index);
