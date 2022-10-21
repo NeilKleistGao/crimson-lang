@@ -23,6 +23,8 @@
 
 #include "compiler.h"
 
+#include <iostream>
+
 #include "lexer.h"
 
 namespace crimson {
@@ -34,7 +36,14 @@ namespace crimson {
                                          cl::Required);
     cl::ParseCommandLineOptions(p_argc, p_argv);
 
+    constexpr int ERR_INDEX = 1;
+
     LexResult lex_res = parseTokens(filename_option);
-    return lex_res.index(); // TODO: next step
+    if (lex_res.index() == ERR_INDEX) {
+      std::cerr << std::get<ERR_INDEX>(lex_res) << std::endl;
+      return ERR_INDEX;
+    }
+
+    return 0;
   }
 } // namespace crimson

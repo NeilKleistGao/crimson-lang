@@ -35,7 +35,7 @@ extern "C" {
 
 namespace crimson {
   struct TokenStream;
-  using LexResult = std::variant<TokenStream, ErrorMessage>;
+  using LexResult = std::variant<TokenStream, std::string>;
 
   LexResult parseTokens(const llvm::cl::opt<std::string>& p_filename);
 

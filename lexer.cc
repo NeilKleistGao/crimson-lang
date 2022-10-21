@@ -24,7 +24,6 @@
 #include "lexer.h"
 
 #include <exception>
-#include <iostream>
 
 namespace crimson {
   // TODO: other systems
@@ -60,6 +59,9 @@ namespace crimson {
                                                  s_compiler_args, 2,
                                                  nullptr, 0,
                                                  CXTranslationUnit_None);
+      if (stream.m_unit == nullptr) {
+        throw std::exception{};
+      }
 
       CXFile file = clang_getFile(stream.m_unit, p_filename.c_str());
       CXSourceLocation start = clang_getLocationForOffset(stream.m_unit, file, 0);
@@ -70,8 +72,7 @@ namespace crimson {
       return LexResult{std::move(stream)};
     }
     catch (...) {
-      std::cerr << "can't compile file " << p_filename.c_str() << "." << std::endl;
-      return LexResult{ErrorMessage{}};
+      return LexResult{std::string{"can't open file "} + p_filename.c_str() + "."};
     }
   }
 
