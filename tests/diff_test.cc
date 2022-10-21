@@ -32,7 +32,7 @@ TEST(DiffTest, EmptyTest) {
 }
 
 TEST(DiffTest, CTest) {
-  int res = crimson::compile(COMPILE_ARGUMENTS("hello_world.court"));
+  int res = crimson::compile(COMPILE_ARGUMENTS("hello_world.court.c"));
   EXPECT_EQ(res, 0);
 }
 

@@ -29,7 +29,8 @@ namespace crimson {
   // TODO: other systems
   static const char* s_compiler_args[] = {
           "-I/usr/include",
-          "-I."
+          "-I.",
+          "-std=c11"
   };
 
   TokenStream::TokenStream(TokenStream&& other) noexcept: m_tokens(other.m_tokens), m_tokens_size(other.m_tokens_size), m_unit(other.m_unit) {
@@ -64,7 +65,7 @@ namespace crimson {
 
     try {
       stream.m_unit = clang_parseTranslationUnit(index, p_filename.c_str(),
-                                                 s_compiler_args, 2,
+                                                 s_compiler_args, 3,
                                                  nullptr, 0,
                                                  CXTranslationUnit_None);
       if (stream.m_unit == nullptr) {
