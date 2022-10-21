@@ -59,6 +59,16 @@ namespace crimson {
     return m_tokens[p_index];
   }
 
+  static CXSourceRange getFileRange(const CXTranslationUnit& p_unit, const CXFile& p_file) {
+    size_t size = 0;
+
+    CXSourceLocation start = clang_getLocationForOffset(p_unit, p_file, 0);
+    clang_getFileContents(p_unit, p_file, &size);
+    CXSourceLocation end = clang_getLocationForOffset(p_unit, p_file, size);
+
+    return clang_getRange(start, end);
+  }
+
   LexResult parseTokens(const llvm::cl::opt<std::string>& p_filename) {
     CXIndex index = clang_createIndex(0, 0);
     TokenStream stream{};
@@ -77,9 +87,7 @@ namespace crimson {
         throw std::exception{};
       }
 
-      CXSourceLocation start = clang_getLocationForOffset(stream.m_unit, file, 0);
-      CXSourceLocation end = clang_getLocationForOffset(stream.m_unit, file, 114514);
-      clang_tokenize(stream.m_unit, clang_getRange(start, end),
+      clang_tokenize(stream.m_unit, getFileRange(stream.m_unit, file),
                      &stream.m_tokens, &stream.m_tokens_size);
 
       return LexResult{std::move(stream)};
