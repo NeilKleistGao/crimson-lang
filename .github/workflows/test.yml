@@ -30,7 +30,7 @@ jobs:
       - name: test
         shell: bash
         working-directory: ./test/court
-        run: ./bin/diff_test
+        run: ../../bin/diff_test
       - name: check no change
         shell: bash
         run: git diff-files -p --exit-code --diff-filter=ADMR -w
